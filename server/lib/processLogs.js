@@ -1,6 +1,6 @@
 const async = require('async');
 const moment = require('moment');
-const Loggly = require('loggly');
+const Logdna = require('logdna');
 const loggingTools = require('auth0-log-extension-tools');
 const config = require('../lib/config');
 const logger = require('../lib/logger');
@@ -15,22 +15,25 @@ module.exports = (storage) =>
       return next();
     }
 
-    const loggly = Loggly.createClient({
-      token: config('LOGGLY_CUSTOMER_TOKEN'),
-      subdomain: config('LOGGLY_SUBDOMAIN') || '-',
-      tags: ['auth0']
-    });
+    const logdnaOpts = {
+      app: config('LOGDNA_TAG'),
+      env: process.env.NODE_ENV,
+      index_meta: config('LOGDNA_INDEX_META')
+    };
+
+    const logdna = Logdna.setupDefaultLogger(config('LOGDNA_KEY', logdnaOpts));
+
 
     const onLogsReceived = (logs, callback) => {
       if (!logs || !logs.length) {
         return callback();
       }
 
-      logger.info(`Sending ${logs.length} logs to Loggly.`);
+      logger.info(`Sending ${logs.length} logs to Logdna.`);
 
       loggly.log(logs, (err) => {
         if (err) {
-          logger.info('Error sending logs to Loggly', err);
+          logger.info('Error sending logs to Logdna', err);
           return callback(err);
         }
 

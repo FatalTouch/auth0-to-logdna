@@ -1,15 +1,15 @@
 {
-  "title": "Auth0 Logs to Loggly",
-  "name": "auth0-logs-to-loggly",
-  "version": "2.0.3",
+  "title": "Auth0 Logs to Logdna",
+  "name": "auth0-logs-to-logdna",
+  "version": "1.0.0",
   "author": "auth0",
-  "description": "This extension will take all of your Auth0 logs and export them to Loggly",
+  "description": "This extension will take all of your Auth0 logs and export them to Logdna",
   "initialUrlPath": "/login",
   "type": "cron",
   "category": "log_export",
-  "repository": "https://github.com/auth0-extensions/auth0-logs-to-loggly",
-  "docsUrl": "https://auth0.com/docs/extensions/loggly",
-  "logoUrl": "https://cdn.auth0.com/extensions/auth0-logs-to-loggly/assets/logo.svg",
+  "repository": "https://github.com/FatalTouch/auth0-to-logdna",
+  "docsUrl": "https://github.com/FatalTouch/auth0-to-logdna",
+  "logoUrl": "https://logdna.com/assets/images/logdna_logo_240w.png",
   "keywords": [
     "auth0",
     "extension"
@@ -25,13 +25,30 @@
       "description": "The amount of logs to batch before sending to Logstash. A single cron execution will send multiple batches.",
       "default": 100
     },
-    "LOGGLY_CUSTOMER_TOKEN": {
-      "description": "Loggly customer token",
+    "LOGDNA_KEY": {
+      "description": "Logdna ingestion key",
       "required": true,
       "type": "password"
     },
-    "LOGGLY_SUBDOMAIN": {
-      "description": "Loggly subdomain"
+    "LOGDNA_APP_TAG": {
+      "description": "App tag to identify logs (default auth0)",
+      "default": "auth0"
+    },
+    "LOGDNA_INDEX_META": {
+      "description": "Enable indexing of meta data",
+      "default": true,
+      "type": "select",
+      "allowMultiple": false,
+      "options": [
+        {
+          "value": true,
+          "text": "True"
+        },
+        {
+          "value": false,
+          "text": "False"
+        }
+      ]
     },
     "START_FROM": {
       "description": "Checkpoint ID of log to start from."

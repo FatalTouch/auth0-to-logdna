@@ -29,18 +29,19 @@ module.exports = (storage) =>
         return callback();
       }
 
-      logger.info(`Sending ${logs.length} logs to Logdna.`);
+      try{
+        logger.info(`Sending ${logs.length} logs to Logdna.`);
 
-      loggly.log(logs, (err) => {
-        if (err) {
-          logger.info('Error sending logs to Logdna', err);
-          return callback(err);
-        }
-
-        logger.info('Upload complete.');
-
+        logs.forEach((logItem)=>{
+          logdna.info(logItem,{source:'auth0'});
+        });
+        console.log('Upload complete');
         return callback();
-      });
+      }
+      catch (err) {
+        logger.info('Error sending logs to Logdna', err);
+        return callback(err);
+      }
     };
 
     const slack = new loggingTools.reporters.SlackReporter({

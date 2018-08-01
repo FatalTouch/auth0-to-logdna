@@ -91,7 +91,7 @@ module.exports = (storage) =>
           const reportTime = config('DAILY_REPORT_TIME') || 16;
 
           if (data.lastReportDate !== now && new Date().getHours() >= reportTime) {
-            sendDailyReport(now);
+            sendDailyReport(now)
           }
         })
     };

@@ -31,8 +31,8 @@ module.exports = () => {
     <% if (assets.vendors) { %><script type="text/javascript" src="/app/<%= assets.vendors %>"></script><% } %>
     <% if (assets.app) { %><script type="text/javascript" src="/app/<%= assets.app %>"></script><% } %>
     <% if (assets.version) { %>
-    <!--<script type="text/javascript" src="//cdn.auth0.com/extensions/auth0-logs-to-loggly/assets/auth0-logs-to-loggly.ui.vendors.<%= assets.version %>.js"></script>-->
-    <!--<script type="text/javascript" src="//cdn.auth0.com/extensions/auth0-logs-to-loggly/assets/auth0-logs-to-loggly.ui.<%= assets.version %>.js"></script>-->
+    <script type="text/javascript" src="//cdn.auth0.com/extensions/auth0-logs-to-loggly/assets/auth0-logs-to-loggly.ui.vendors.<%= assets.version %>.js"></script>
+    <script type="text/javascript" src="//cdn.auth0.com/extensions/auth0-logs-to-loggly/assets/auth0-logs-to-loggly.ui.<%= assets.version %>.js"></script>
     <% } %>
   </body>
   </html>
